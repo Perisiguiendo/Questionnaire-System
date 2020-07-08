@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷填写</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./asserts/css/reset.css">
+    <link rel="stylesheet" href="./asserts/css/question.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- 弹窗 -->
+        <div class="pop-up-window-box">
+            <div class="pop-up-window">
+                <h2>信息修改</h2>
+                <span>问卷标题</span>
+                <input type="text" class="modify-title">
+                <span>问卷说明</span>
+                <textarea name="" id="" cols="20" rows="5" class="modify-des"></textarea>
+                <div>
+                    <a href="#" class="que-cancel">取消</a>
+                    <a href="#" class="que-confirm">确定</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row nav-top">
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <div>
+                    <a>完成编辑</a>
+                    <a class="iconfont">&#xe600; 预览</a>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-6 col-md-8"></div>
+        </div>
+
+        <div class="row que-content">
+            <div class="col-sm-1 col-md-2"></div>
+            <div class="col-sm-10 col-md-8">
+                <div class="que-top">
+                    <ul>
+                        <li class="iconfont ops-radio">&#xe735; 单选</li>
+                        <li class="iconfont ops-checkbox">&#xe607; 多选</li>
+                        <li class="iconfont ops-fill">&#xe717; 填空</li>
+                        <li class="iconfont ops-matrix">&#xeafc; 矩阵</li>
+                        <li class="iconfont ops-scale">&#xe60a; 量表</li>
+                    </ul>
+                </div>
+                <div class="que-btm">
+                    <span class="title">请在此处填写问卷标题</span><br />
+                    <span class="describe">请在此处填写问卷描述</span>
+                    <!-- <div class="que-topic">
+                        <div class="que-ops">
+                            <a href="#">在此题后边插入新题</a>
+                            <a href="#">上移</a>
+                            <a href="#">下移</a>
+                            <a href="#">最前</a>
+                            <a href="#">最后</a>
+                            <a href="#">复制</a>
+                            <a href="#">编辑</a>
+                            <a href="#">删除</a>
+                        </div>
+                        <div class="que-radio">
+                            <div class="que-title">1.单选？<span>【单选】</span></div>
+                            <div class="edit-screen">
+                                <textarea cols="60" rows="4" placeholder="请编辑问题..."></textarea>
+                                <div>
+                                    <input type="radio">
+                                    <input type="text" placeholder="【单选】">
+                                    <span>删除</span>
+                                </div>
+                                <span class="iconfont addoption">&#xe62a; 增加选项</span>
+                                <div class="cancel-finish">
+                                    <a>取消编辑</a>
+                                    <a>完成编辑</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="col-sm-1 col-md-2"></div>
+        </div>
+
+
+
+    </div>
+
+
+    <script>
+        //刷新页面弹窗提示
+        var UnloadConfirm = {};
+        UnloadConfirm.MSG_UNLOAD = "数据尚未保存，离开后可能会导致数据丢失\n\n您确定要离开吗？";
+        UnloadConfirm.set = function (a) {
+            window.onbeforeunload = function (b) {
+                b = b || window.event;
+                b.returnValue = a;
+                return a
+            }
+        };
+        UnloadConfirm.clear = function () {
+            fckDraft.delDraftById();
+            window.onbeforeunload = function () {}
+        };
+        UnloadConfirm.set(UnloadConfirm.MSG_UNLOAD);
+
+        //问卷对象
+        var Que = {
+            otitle: document.getElementsByClassName('title')[0], //问卷标题
+            odescribe: document.getElementsByClassName('describe')[0], //问卷描述
+            ocancel: document.getElementsByClassName('que-cancel')[0], //取消按钮
+            oconfirm: document.getElementsByClassName('que-confirm')[0], //确认按钮
+            opopWindow: document.getElementsByClassName('pop-up-window-box')[0], //弹窗
+            omodify_title: document.getElementsByClassName('modify-title')[0], //弹窗标题修改内容
+            omodify_des: document.getElementsByClassName('modify-des')[0], // 弹窗描述修改内容
+            oquebtm: document.getElementsByClassName('que-btm')[0], //问卷内容区
+            oradio: document.getElementsByClassName('ops-radio')[0], //单选
+            ocheckbox: document.getElementsByClassName('ops-checkbox')[0], //多选
+            ofill: document.getElementsByClassName('ops-fill')[0], //填空
+            omatrix: document.getElementsByClassName('ops-matrix')[0], //矩阵
+            oscale: document.getElementsByClassName('ops-scale')[0], //量表
+
+
+            //显示弹窗
+            showPopWindow: function () {
+                this.opopWindow.style.display = "block";
+            },
+
+            //隐藏弹窗
+            hidePopWindow: function () {
+                this.opopWindow.style.display = "none";
+            },
+
+            //修改问卷标题
+            modify_Tit: function () {
+                this.otitle.innerHTML = this.omodify_title.value;
+            },
+
+            //修改问卷描述
+            modify_De: function () {
+                this.odescribe.innerHTML = this.omodify_des.value;
+
+            },
+
+            //清除弹窗中的内容
+            clearValue: function () {
+                this.omodify_title.value = '';
+                this.omodify_des.value = '';
+            },
+
+            radioHtml: function () {
+                return '<div class="que-ops">' +
+                    '<a href="#">在此题后边插入新题</a>' +
+                    '<a href="#">上移</a>' +
+                    '<a href="#">下移</a>' +
+                    '<a href="#">最前</a>' +
+                    '<a href="#">最后</a>' +
+                    '<a href="#">复制</a>' +
+                    '<a href="#">编辑</a>' +
+                    '<a href="#">删除</a>' +
+                    '</div>' +
+                    '<div class="que-radio">' +
+                    '<div class="que-title">1.单选？<span>【单选】</span></div>' +
+                    '<input type="radio">选项一<br />' +
+                    '<input type="radio">选项二<br />' +
+                    '</div>';
+            },
+
+            checkboxHtml: function () {
+                return '<div class="que-ops">' +
+                    '<a href="#">在此题后边插入新题</a>' +
+                    '<a href="#">上移</a>' +
+                    '<a href="#">下移</a>' +
+                    '<a href="#">最前</a>' +
+                    '<a href="#">最后</a>' +
+                    '<a href="#">复制</a>' +
+                    '<a href="#">编辑</a>' +
+                    '<a href="#">删除</a>' +
+                    '</div>' +
+                    '<div class="que-radio">' +
+                    '<div class="que-title">1.多选？<span>【多选】</span></div>' +
+                    '<input type="checkbox">选项一<br />' +
+                    '<input type="checkbox">选项二<br />' +
+                    '</div>';
+            },
+
+            fillHtml: function () {
+                return '<div class="que-ops">' +
+                    '<a href="#">在此题后边插入新题</a>' +
+                    '<a href="#">上移</a>' +
+                    '<a href="#">下移</a>' +
+                    '<a href="#">最前</a>' +
+                    '<a href="#">最后</a>' +
+                    '<a href="#">复制</a>' +
+                    '<a href="#">编辑</a>' +
+                    '<a href="#">删除</a>' +
+                    '</div>' +
+                    '<div class="que-radio">' +
+                    '<div class="que-title">1.填空？<span>【填空】</span></div>' +
+                    '<textarea name="" id="" cols="50" rows="8"></textarea>' +
+                    '</div>';
+            },
+
+            editHtml: function () {
+                return '<div class="edit-screen">' +
+                '<textarea cols="60" rows="4" placeholder="请编辑问题..."></textarea>' +
+                '<div>' +
+                '<input type="radio">' +
+                '<input type="text" placeholder="【单选】">' +
+                '<span>删除</span>' +
+                '</div>' +
+                '<span class="iconfont addoption">&#xe62a; 增加选项</span>' +
+                '<div class="cancel-finish">' +
+                '<a>取消编辑</a>' +
+                '<a>完成编辑</a>' +
+                '</div>' +
+                '</div>';
+            },
+
+            
+
+            // matrixHtml:
+
+            //scaleHtml:
+
+
+            //添加单选内容
+            addRadio: function () {
+                var div = document.createElement('div');
+                div.className = "que-topic";
+                div.innerHTML = this.radioHtml();
+                this.oquebtm.appendChild(div);
+            },
+
+            //添加多选内容
+            addCheckbox: function () {
+                var div = document.createElement('div');
+                div.className = "que-topic";
+                div.innerHTML = this.checkboxHtml();
+                this.oquebtm.appendChild(div);
+            },
+
+            //添加填空内容
+            addFill: function () {
+                var div = document.createElement('div');
+                div.className = "que-topic";
+                div.innerHTML = this.fillHtml();
+                this.oquebtm.appendChild(div);
+            }
+
+
+        }
+
+        //显示弹窗
+        Que.odescribe.onclick = function () {
+            Que.showPopWindow();
+        }
+
+        Que.otitle.onclick = function () {
+            Que.showPopWindow();
+        }
+
+        //隐藏弹窗
+        Que.ocancel.onclick = function () {
+            Que.hidePopWindow();
+        }
+
+        Que.oconfirm.onclick = function () {
+            Que.modify_Tit(); //更改标题
+            Que.modify_De(); //更改描述
+            Que.hidePopWindow(); //隐藏弹窗
+            Que.clearValue(); //弹窗内容清空
+        }
+
+        Que.oradio.onclick = function () {
+            Que.addRadio();
+            var ops = document.getElementsByClassName('que-ops');
+            for (let i = 0; i < ops.length; i++) {
+                var as = ops[i].getElementsByTagName('a');
+                var insert = as[0];
+                var moveUp = as[1];
+                var moveDown = as[2];
+                var first = as[3];
+                var last = as[4];
+                var copy = as[5];
+                var edit = as[6];
+                var del = as[7];
+
+                insert.onclick = function () {
+                    Que.addRadio();
+                }
+
+                edit.onclick = function () {
+
+                }
+
+
+            }
+        }
+
+        Que.ocheckbox.onclick = function () {
+            Que.addCheckbox();
+        }
+
+        Que.ofill.onclick = function () {
+            Que.addFill();
+        }
+    </script>
+</body>
+
+</html>
