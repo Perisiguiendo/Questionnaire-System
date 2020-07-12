@@ -9,6 +9,9 @@
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./asserts/css/reset.css">
     <link rel="stylesheet" href="./asserts/css/question.css">
+    <link rel="stylesheet" href="./asserts/css/wenjuan_ht.css">
+    <script src="./asserts/script/jquery.min.js"></script>
+    <script src="./asserts/script/index.js"></script>
 </head>
 
 <body>
@@ -42,60 +45,150 @@
             <div class="col-sm-1 col-md-2"></div>
             <div class="col-sm-10 col-md-8">
                 <div class="que-top">
-                    <ul>
-                        <li class="iconfont ops-radio">&#xe735; 单选</li>
-                        <li class="iconfont ops-checkbox">&#xe607; 多选</li>
-                        <li class="iconfont ops-fill">&#xe717; 填空</li>
-                        <li class="iconfont ops-matrix">&#xeafc; 矩阵</li>
-                        <li class="iconfont ops-scale">&#xe60a; 量表</li>
+                    <ul id="addquerstions" class="addquerstions">
+                        <li class="iconfont ops-radio ops-click" value="0">&#xe735; 单选</li>
+                        <li class="iconfont ops-checkbox ops-click" value="1">&#xe607; 多选</li>
+                        <li class="iconfont ops-fill ops-click" value="2">&#xe717; 填空</li>
+                        <li class="iconfont ops-matrix ops-click" value="3">&#xeafc; 矩阵</li>
+                        <li class="iconfont ops-scale ops-click" value="4">&#xe60a; 量表</li>
                     </ul>
                 </div>
                 <div class="que-btm">
                     <span class="title">请在此处填写问卷标题</span><br />
                     <span class="describe">请在此处填写问卷描述</span>
-                    <!-- <div class="que-topic">
-                        <div class="que-ops">
-                            <a href="#">在此题后边插入新题</a>
-                            <a href="#">上移</a>
-                            <a href="#">下移</a>
-                            <a href="#">最前</a>
-                            <a href="#">最后</a>
-                            <a href="#">复制</a>
-                            <a href="#">编辑</a>
-                            <a href="#">删除</a>
-                        </div>
-                        <div class="que-radio">
-                            <div class="que-title">1.单选？<span>【单选】</span></div>
-                            <div class="edit-screen">
-                                <textarea cols="60" rows="4" placeholder="请编辑问题..."></textarea>
-                                <div>
-                                    <input type="radio">
-                                    <input type="text" placeholder="【单选】">
-                                    <span>删除</span>
+                    <div class="all_660">
+                        <div class="yd_box"></div>
+                        <div class="xxk_box">
+                            <div class="xxk_conn hide">
+                                <!--单选-->
+                                <div class="xxk_xzqh_box dxuan ">
+                                    <textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_dx"
+                                        placeholder="单选题目"></textarea>
+                                    <div class="title_itram">
+                                        <div class="kzjxx_iteam">
+                                            <input name="" type="radio" value="" class="dxk">
+                                            <input name="" type="text" class="input_wenbk" value="" placeholder="选项">
+                                            <label>
+                                                <input name="" type="checkbox" value="" class="fxk"> <span>可填空</span>
+                                            </label> <a href="javascript:void(0);" class="del_xm">删除</a>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0)" class="zjxx">增加选项</a>
+                                    <!--完成编辑-->
+                                    <div class="bjqxwc_box">
+                                        <a href="javascript:void(0);" class="qxbj_but">取消编辑</a>
+                                        <a href="javascript:void(0);" class="swcbj_but"> 完成编辑</a>
+                                    </div>
                                 </div>
-                                <span class="iconfont addoption">&#xe62a; 增加选项</span>
-                                <div class="cancel-finish">
-                                    <a>取消编辑</a>
-                                    <a>完成编辑</a>
+                                <!--多选-->
+                                <div class="xxk_xzqh_box duoxuan hide">
+                                    <textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_duox"
+                                        placeholder="多选题目"></textarea>
+                                    <div class="title_itram">
+                                        <div class="kzjxx_iteam">
+                                            <input name="" type="checkbox" value="" class="dxk">
+                                            <input name="" type="text" class="input_wenbk" value="选项" placeholder="选项">
+                                            <label>
+                                                <input name="" type="checkbox" value="" class="fxk">
+                                                <span>可填空</span></label>
+                                            <a href="javascript:void(0);" class="del_xm">删除</a>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0)" class="zjxx">增加选项</a>
+                                    <!--完成编辑-->
+                                    <div class="bjqxwc_box">
+                                        <a href="javascript:void(0);" class="qxbj_but">取消编辑</a>
+                                        <a href="javascript:void(0);" class="swcbj_but"> 完成编辑</a>
+                                    </div>
+                                </div>
+                                <!-- 填空-->
+                                <div class="xxk_xzqh_box tktm hide">
+                                    <textarea name="" cols="" rows="" class="input_wenbk btwen_text btwen_text_tk"
+                                        placeholder="答题区"></textarea>
+                                    <!--完成编辑-->
+                                    <div class="bjqxwc_box">
+                                        <a href="javascript:void(0);" class="qxbj_but">取消编辑</a>
+                                        <a href="javascript:void(0);" class="swcbj_but"> 完成编辑</a>
+                                    </div>
+                                </div>
+                                <!-- 矩阵-->
+                                <div class="xxk_xzqh_box  hide">
+                                    <div class="line_dl"></div>
+                                    <div class="jztm">
+                                        <textarea name="" cols="" rows="" class="input_wenbk btwen_text"
+                                            placeholder="题目"></textarea>
+                                        <table width="100%" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr valign="top">
+                                                    <td width="135">
+                                                        <h4 class="ritwenz_xx">左标题</h4>
+                                                        <textarea name="" cols="" rows="" class="leftbtwen_text"
+                                                            placeholder="例子：CCTV1，CCTV2，CCTV3"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="ritwenz_xx  ">
+                                                            右侧选项文字 <input type="radio" name="xz" value="0"
+                                                                checked="checked" class="xzqk">单选<input type="radio"
+                                                                value="1" name="xz" class="xzqk">多选
+                                                        </h4>
+                                                        <div class="title_itram">
+                                                            <div class="kzjxx_iteam">
+                                                                <input name="" type="text"
+                                                                    class="input_wenbk jzwent_input" value="选项"
+                                                                    onBlur="if(!this.value)this.value='选项'"
+                                                                    onClick="if(this.value&amp;&amp;this.value=='选项' )  this.value=''">
+                                                                <label>
+                                                                    <input name="" type="checkbox" value="" class="fxk">
+                                                                    <span>可填空</span></label> <a
+                                                                    href="javascript:void(0);" class="del_xm">删除</a>
+                                                            </div>
+                                                            <div class="kzjxx_iteam">
+                                                                <input name="" type="text"
+                                                                    class="input_wenbk jzwent_input" value="选项"
+                                                                    onBlur="if(!this.value)this.value='选项'"
+                                                                    onClick="if(this.value&amp;&amp;this.value=='选项' )  this.value=''">
+                                                                <label>
+                                                                    <input name="" type="checkbox" value="" class="fxk">
+                                                                    <span>可填空</span></label> <a
+                                                                    href="javascript:void(0);" class="del_xm">删除</a>
+                                                            </div>
+                                                            <div class="kzjxx_iteam">
+                                                                <input name="" type="text"
+                                                                    class="input_wenbk jzwent_input" value="选项"
+                                                                    onBlur="if(!this.value)this.value='选项'"
+                                                                    onClick="if(this.value&amp;&amp;this.value=='选项' )  this.value=''">
+                                                                <label>
+                                                                    <input name="" type="checkbox" value="" class="fxk">
+                                                                    <span>可填空</span></label> <a
+                                                                    href="javascript:void(0);" class="del_xm">删除</a>
+                                                            </div>
+                                                        </div> <a href="javascript:void(0)" class="zjxx"
+                                                            style="margin-left: 0;">增加选项</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--完成编辑-->
+                                        <div class="bjqxwc_box">
+                                            <a href="javascript:void(0);" class="qxbj_but">取消编辑</a> <a
+                                                href="javascript:void(0);" class="swcbj_but"> 完成编辑</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
             </div>
             <div class="col-sm-1 col-md-2"></div>
         </div>
-
-
-
     </div>
-
 
     <script>
         //刷新页面弹窗提示
         var UnloadConfirm = {};
-        UnloadConfirm.MSG_UNLOAD = "数据尚未保存，离开后可能会导致数据丢失\n\n您确定要离开吗？";
+        UnloadConfirm.MSG_UNLOAD = "数据尚未保存，离开后可能会导致数据丢失\n\n你确定要离开吗？";
         UnloadConfirm.set = function (a) {
             window.onbeforeunload = function (b) {
                 b = b || window.event;
@@ -108,208 +201,6 @@
             window.onbeforeunload = function () {}
         };
         UnloadConfirm.set(UnloadConfirm.MSG_UNLOAD);
-
-        //问卷对象
-        var Que = {
-            otitle: document.getElementsByClassName('title')[0], //问卷标题
-            odescribe: document.getElementsByClassName('describe')[0], //问卷描述
-            ocancel: document.getElementsByClassName('que-cancel')[0], //取消按钮
-            oconfirm: document.getElementsByClassName('que-confirm')[0], //确认按钮
-            opopWindow: document.getElementsByClassName('pop-up-window-box')[0], //弹窗
-            omodify_title: document.getElementsByClassName('modify-title')[0], //弹窗标题修改内容
-            omodify_des: document.getElementsByClassName('modify-des')[0], // 弹窗描述修改内容
-            oquebtm: document.getElementsByClassName('que-btm')[0], //问卷内容区
-            oradio: document.getElementsByClassName('ops-radio')[0], //单选
-            ocheckbox: document.getElementsByClassName('ops-checkbox')[0], //多选
-            ofill: document.getElementsByClassName('ops-fill')[0], //填空
-            omatrix: document.getElementsByClassName('ops-matrix')[0], //矩阵
-            oscale: document.getElementsByClassName('ops-scale')[0], //量表
-
-
-            //显示弹窗
-            showPopWindow: function () {
-                this.opopWindow.style.display = "block";
-            },
-
-            //隐藏弹窗
-            hidePopWindow: function () {
-                this.opopWindow.style.display = "none";
-            },
-
-            //修改问卷标题
-            modify_Tit: function () {
-                this.otitle.innerHTML = this.omodify_title.value;
-            },
-
-            //修改问卷描述
-            modify_De: function () {
-                this.odescribe.innerHTML = this.omodify_des.value;
-
-            },
-
-            //清除弹窗中的内容
-            clearValue: function () {
-                this.omodify_title.value = '';
-                this.omodify_des.value = '';
-            },
-
-            radioHtml: function () {
-                return '<div class="que-ops">' +
-                    '<a href="#">在此题后边插入新题</a>' +
-                    '<a href="#">上移</a>' +
-                    '<a href="#">下移</a>' +
-                    '<a href="#">最前</a>' +
-                    '<a href="#">最后</a>' +
-                    '<a href="#">复制</a>' +
-                    '<a href="#">编辑</a>' +
-                    '<a href="#">删除</a>' +
-                    '</div>' +
-                    '<div class="que-radio">' +
-                    '<div class="que-title">1.单选？<span>【单选】</span></div>' +
-                    '<input type="radio">选项一<br />' +
-                    '<input type="radio">选项二<br />' +
-                    '</div>';
-            },
-
-            checkboxHtml: function () {
-                return '<div class="que-ops">' +
-                    '<a href="#">在此题后边插入新题</a>' +
-                    '<a href="#">上移</a>' +
-                    '<a href="#">下移</a>' +
-                    '<a href="#">最前</a>' +
-                    '<a href="#">最后</a>' +
-                    '<a href="#">复制</a>' +
-                    '<a href="#">编辑</a>' +
-                    '<a href="#">删除</a>' +
-                    '</div>' +
-                    '<div class="que-radio">' +
-                    '<div class="que-title">1.多选？<span>【多选】</span></div>' +
-                    '<input type="checkbox">选项一<br />' +
-                    '<input type="checkbox">选项二<br />' +
-                    '</div>';
-            },
-
-            fillHtml: function () {
-                return '<div class="que-ops">' +
-                    '<a href="#">在此题后边插入新题</a>' +
-                    '<a href="#">上移</a>' +
-                    '<a href="#">下移</a>' +
-                    '<a href="#">最前</a>' +
-                    '<a href="#">最后</a>' +
-                    '<a href="#">复制</a>' +
-                    '<a href="#">编辑</a>' +
-                    '<a href="#">删除</a>' +
-                    '</div>' +
-                    '<div class="que-radio">' +
-                    '<div class="que-title">1.填空？<span>【填空】</span></div>' +
-                    '<textarea name="" id="" cols="50" rows="8"></textarea>' +
-                    '</div>';
-            },
-
-            editHtml: function () {
-                return '<div class="edit-screen">' +
-                '<textarea cols="60" rows="4" placeholder="请编辑问题..."></textarea>' +
-                '<div>' +
-                '<input type="radio">' +
-                '<input type="text" placeholder="【单选】">' +
-                '<span>删除</span>' +
-                '</div>' +
-                '<span class="iconfont addoption">&#xe62a; 增加选项</span>' +
-                '<div class="cancel-finish">' +
-                '<a>取消编辑</a>' +
-                '<a>完成编辑</a>' +
-                '</div>' +
-                '</div>';
-            },
-
-            
-
-            // matrixHtml:
-
-            //scaleHtml:
-
-
-            //添加单选内容
-            addRadio: function () {
-                var div = document.createElement('div');
-                div.className = "que-topic";
-                div.innerHTML = this.radioHtml();
-                this.oquebtm.appendChild(div);
-            },
-
-            //添加多选内容
-            addCheckbox: function () {
-                var div = document.createElement('div');
-                div.className = "que-topic";
-                div.innerHTML = this.checkboxHtml();
-                this.oquebtm.appendChild(div);
-            },
-
-            //添加填空内容
-            addFill: function () {
-                var div = document.createElement('div');
-                div.className = "que-topic";
-                div.innerHTML = this.fillHtml();
-                this.oquebtm.appendChild(div);
-            }
-
-
-        }
-
-        //显示弹窗
-        Que.odescribe.onclick = function () {
-            Que.showPopWindow();
-        }
-
-        Que.otitle.onclick = function () {
-            Que.showPopWindow();
-        }
-
-        //隐藏弹窗
-        Que.ocancel.onclick = function () {
-            Que.hidePopWindow();
-        }
-
-        Que.oconfirm.onclick = function () {
-            Que.modify_Tit(); //更改标题
-            Que.modify_De(); //更改描述
-            Que.hidePopWindow(); //隐藏弹窗
-            Que.clearValue(); //弹窗内容清空
-        }
-
-        Que.oradio.onclick = function () {
-            Que.addRadio();
-            var ops = document.getElementsByClassName('que-ops');
-            for (let i = 0; i < ops.length; i++) {
-                var as = ops[i].getElementsByTagName('a');
-                var insert = as[0];
-                var moveUp = as[1];
-                var moveDown = as[2];
-                var first = as[3];
-                var last = as[4];
-                var copy = as[5];
-                var edit = as[6];
-                var del = as[7];
-
-                insert.onclick = function () {
-                    Que.addRadio();
-                }
-
-                edit.onclick = function () {
-
-                }
-
-
-            }
-        }
-
-        Que.ocheckbox.onclick = function () {
-            Que.addCheckbox();
-        }
-
-        Que.ofill.onclick = function () {
-            Que.addFill();
-        }
     </script>
 </body>
 

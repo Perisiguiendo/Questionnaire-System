@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预览界面</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./asserts/css/reset.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container-fluid {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(#64ace6, #fcfcfc);
+        }
+
+        .top {
+            height: 10%;
+            width: 100%;
+        }
+
+        .row>div:nth-child(2) {
+            /* height: 500px; */
+            background-color: #ffffff;
+        }
+
+        .que::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .que::-webkit-scrollbar-thumb {
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .que>div {
+            padding: 0;
+            margin: 0;
+        }
+
+        .head-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #b9b9b9;
+        }
+
+        .head-top div {
+            margin: 0 auto;
+
+        }
+
+        .head-top div h1 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2ea0fa;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .head-top div h4 {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .que-con {
+            height: 500px;
+            border-bottom: 1px dashed #b9b9b9;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin-left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 40px;
+            border-width: 0px;
+            border-radius: 3px;
+            background: #1E90FF;
+            cursor: pointer;
+            outline: none;
+            font-family: Microsoft YaHei;
+            color: white;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #5599FF;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="top"></div>
+        <div class="row que">
+            <div class="col-xs-1 col-sm-2 col-md-3"></div>
+            <div class="col-xs-10 col-sm-8 col-md-6">
+                <div class="head-top">
+                    <div>
+                        <h1>html5页面生成动态二维码</h1>
+                        <h4>使用hsvg，在动画、图表的制作上它们各有特点。</h4>
+                    </div>
+                    <img
+                        src="http://qr.liantu.com/api.php?bg=f3f3f3&fg=000000&el=l&w=80&m=5&text=http://192.168.0.100:5500/preview.html" />
+                </div>
+                <div class="que-con">
+
+                </div>
+                <button>提交</button>
+            </div>
+            <div class="col-xs-1 col-sm-2 col-md-3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

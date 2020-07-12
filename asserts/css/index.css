@@ -102,10 +102,10 @@ body,
     padding-bottom: 15px;
 }
 
-.container-fluid .middle .middle-div .login-box-bg .login-box .username,
-.container-fluid .middle .middle-div .login-box-bg .login-box .password,
-.container-fluid .middle .middle-div .login-box-bg-phone .login-box .username,
-.container-fluid .middle .middle-div .login-box-bg-phone .login-box .password {
+.container-fluid .middle .middle-div .login-box-bg .login-box .divusername,
+.container-fluid .middle .middle-div .login-box-bg .login-box .divpassword,
+.container-fluid .middle .middle-div .login-box-bg-phone .login-box .divusername,
+.container-fluid .middle .middle-div .login-box-bg-phone .login-box .divpassword {
     border: 1px solid #e7e7e7;
     height: 50px;
     margin-bottom: 20px;
@@ -116,10 +116,10 @@ body,
     align-items: center;
 }
 
-.container-fluid .middle .middle-div .login-box-bg .login-box .username>span,
-.container-fluid .middle .middle-div .login-box-bg .login-box .password>span,
-.container-fluid .middle .middle-div .login-box-bg-phone .login-box .username>span,
-.container-fluid .middle .middle-div .login-box-bg-phone .login-box .password>span {
+.container-fluid .middle .middle-div .login-box-bg .login-box .divusername>span,
+.container-fluid .middle .middle-div .login-box-bg .login-box .divpassword>span,
+.container-fluid .middle .middle-div .login-box-bg-phone .login-box .divusername>span,
+.container-fluid .middle .middle-div .login-box-bg-phone .login-box .divpassword>span {
     display: inline-block;
     width: 13%;
     text-align: center;
