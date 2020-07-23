@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" onchange="importf(this)" />
+</body>
+<script src="./asserts/script/xlsx.core.min.js"></script>
+<script>
+    var wb; //读取完成的数据
+    var rABS = false; //是否将文件读取为二进制字符串
+    var data = [];
+
+    function importf(obj) { //导入
+        if (!obj.files) {
+            $('.table-footer').show();
+            return;
+        }
+        var f = obj.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var data = e.target.result;
+            if (rABS) {
+                wb = XLSX.read(btoa(fixdata(data)), { //手动转化
+                    type: 'base64'
+                });
+            } else {
+                wb = XLSX.read(data, {
+                    type: 'binary'
+                });
+            }
+            //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+            //wb.Sheets[Sheet名]获取第一个Sheet的数据
+            // document.getElementById("demo").innerHTML
+            //JSON数据
+            data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+            var strData = JSON.stringify(data);
+            console.log(strData);
+            strData.replace("{", "@");
+            strData.replace("}", "@");
+            strData.replace(":", "=");
+            strData.replace(",", "&");
+
+            console.log(strData);
+
+
+            // $.ajax({
+            //     type:"post",
+            //     url:"/sendmail/add",
+            //     data:JSON.stringify(data),
+            //     contentType: 'application/json;charset=utf-8',
+            //     dataType:"json",
+            //     success: function(){
+            //         console.log("成功");
+            //     }
+            // });
+
+
+            // $.ajax({
+            //     url: '/sendmail/reserveRooms',
+            //     type: 'post',
+            //     data: {
+            //         'room_nos': room_nos
+            //     },
+            //     traditional: true, //用传统方式序列化数据
+            //     success: function (flag) {
+            //         alert(flag)
+            //     }
+            // });
+
+            if (data.length > 0) {
+                // $('.table-footer').show();
+                // console.log(data);
+                // for (let i = data.length - 1; i >= 0; i--) {
+                //     $('.table-head').after(
+                //         '<tr>' +
+                //         '<td>' + data[i].number + '</td>' +
+                //         '<td>' + data[i].student_number + '</td>' +
+                //         '<td>' + data[i].name + '</td>' +
+                //         '<td>' + data[i].college + '</td>' +
+                //         '<td>' + data[i].phone + '</td>' +
+                //         '<td>' + data[i].email + '</td>' +
+                //         '<td> <a>删除</a> </td>' +
+                //         '</tr>'
+                //     );
+                // }
+                // $('.table-footer').hide();
+            }
+
+        };
+        if (rABS) {
+            reader.readAsArrayBuffer(f);
+        } else {
+            reader.readAsBinaryString(f);
+        }
+    }
+</script>
+
+</html>

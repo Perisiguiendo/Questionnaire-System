@@ -25,7 +25,7 @@ body,
     width: 100%;
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .container-fluid {
@@ -35,20 +35,37 @@ body,
 
 .container-fluid .pop-up-window-box {
     display: none;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+    position: fixed;
+    /* position: relative; */
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    left: 50%;
+    height: 450px;
+    border-radius: 30px;
+    width: 500px;
     background: rgba(0, 0, 0, 0.5);
     z-index: 9999;
 }
 
+.que-content .que-btm {
+    position: relative;
+    background: #ffffff;
+    padding: 0 10px;
+    margin: 0 auto;
+    height: 1560px;
+    overflow-y: scroll;
+}
+
 .container-fluid .pop-up-window-box .pop-up-window {
-    position: absolute;
+    /* position: absolute; */
     width: 400px;
     height: 340px;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    margin: 0 auto;
+    margin-top: 50%;
+    transform: translateY(-60%);
+    /* left: 50%; */
+    /* top: 50%; */
+    /* transform: translateX(-50%) translateY(-50%); */
     background: #ffffff;
 }
 
@@ -184,14 +201,7 @@ body,
     cursor: pointer;
 }
 
-.que-content .que-btm {
-    position: relative;
-    background: #ffffff;
-    padding: 0 10px;
-    margin: 0 auto;
-    height: 760px;
-    overflow-y: scroll;
-}
+
 
 .que-content .que-btm::-webkit-scrollbar {
     width: 6px;

@@ -1,10 +1,9 @@
 $(document).ready(function (e) {
-
+	console.log("ksdjfksdf");
 	//显示弹窗
 	$('.title').click(function () {
 		$('.pop-up-window-box').show();
 	});
-
 	//显示弹窗
 	$('.describe').click(function () {
 		$('.pop-up-window-box').show();
@@ -26,9 +25,7 @@ $(document).ready(function (e) {
 			$('.modify-title').val('');
 			$('.modify-des').val('');
 		}
-
 	});
-
 	$('.ops-click').click(function () {
 
 		var index = $(this).attr("value"); //选择添加问题的类型
@@ -398,4 +395,5 @@ $(document).ready(function (e) {
 		//清除     
 		$(this).parent(".bjqxwc_box").parent(".dx_box").empty().hide();
 	});
+
 });
